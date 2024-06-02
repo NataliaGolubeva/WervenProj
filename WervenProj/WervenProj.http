@@ -1,0 +1,6 @@
+@WervenProj_HostAddress = http://localhost:5169
+
+GET {{WervenProj_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
