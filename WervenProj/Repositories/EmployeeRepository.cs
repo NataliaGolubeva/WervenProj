@@ -34,22 +34,28 @@ namespace WervenProj.Repositories
             }
             catch (Exception ex) { throw; }
         }
-        public async Task<Employee> GetEmployee(int employeeId)
+        public async Task<EmployeeDTO?> GetEmployee(int employeeId)
         {
             try
             {
-                var employee = await _db.Employees.FirstOrDefaultAsync(e => e.Id == employeeId);
-                if (employee == null)
-                {
-                    return null;
-                }
+                var query = from employee in _db.Employees
+                            join role in _db.EmployeeRoles
+                            on employee.RoleId equals role.Id
+                            where employee.Id == employeeId 
+                            select new EmployeeDTO()
+                            {
+                                Id = employee.Id,
+                                Name = employee.Name,
+                                Role = role.RoleName
 
-                return employee;
+                            };
+                var result = await query.FirstOrDefaultAsync();
+                return result;
             }
             catch (Exception ex) { throw; }
         }
 
-        public async Task<bool> UpdateEmployee(EmployeeCreate data)
+        public  Task<bool> UpdateEmployee(EmployeeCreate data)
         {
             throw new NotImplementedException();
         }

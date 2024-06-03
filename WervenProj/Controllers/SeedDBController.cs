@@ -10,16 +10,18 @@ namespace WervenProj.Controllers
     [Route("api/seedDb")]
     public class SeedDBController : ControllerBase
     {
-        public SeedDBController(ILogger<SeedDBController> log, IEmployeeRepository employeeRepo, IConstractionSiteRepository constractionSiteRepo)
+        public SeedDBController(ILogger<SeedDBController> log, IEmployeeRepository employeeRepo, IConstractionSiteRepository constractionSiteRepo, IEnrollmentRepository enrollmentRepo)
         {
             _log = log;
             _employeeRepo = employeeRepo;
             _constractionSiteRepo = constractionSiteRepo;
+            _enrollmentRepo = enrollmentRepo;
         }
 
         public ILogger<SeedDBController> _log { get; }
         public IEmployeeRepository _employeeRepo { get; }
         public IConstractionSiteRepository _constractionSiteRepo { get; }
+        public IEnrollmentRepository _enrollmentRepo { get; }
 
         [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]
@@ -46,16 +48,15 @@ namespace WervenProj.Controllers
                     new EmployeeCreate {Name= "Mavis Warner", RoleId= 3},
                     new EmployeeCreate {Name= "Leo Wells", RoleId= 4},
                     new EmployeeCreate {Name= "Jacqueline Schmidt", RoleId= 2},
-
-
                 };
-                foreach (EmployeeCreate employee in employees) {
+                foreach (EmployeeCreate employee in employees)
+                {
                     await _employeeRepo.CreateEmployee(employee);
                 }
                 List<ConstractionSiteCreate> sites = new List<ConstractionSiteCreate>
                 {
                     new ConstractionSiteCreate {
-                        Name= "Business Center", 
+                        Name= "Business Center",
                         Description= "New buisness center with offices",
                         StatusId= 1
                     },
@@ -82,7 +83,30 @@ namespace WervenProj.Controllers
                 };
                 foreach (ConstractionSiteCreate site in sites)
                 {
-                    await _constractionSiteRepo.CreateSite(site);
+                    await _constractionSiteRepo.CreateConstractionSite(site);
+                }
+                List<EnrollmentData> enrollments = new List<EnrollmentData>
+                {
+                    new EnrollmentData {EmployeeId= 5, ConstractionSiteId= 3},
+                    new EnrollmentData {EmployeeId= 6, ConstractionSiteId= 3},
+                    new EnrollmentData {EmployeeId= 7, ConstractionSiteId= 3},
+                    new EnrollmentData {EmployeeId= 8, ConstractionSiteId= 3},
+                    new EnrollmentData {EmployeeId= 9, ConstractionSiteId= 3},
+                    new EnrollmentData {EmployeeId= 10, ConstractionSiteId= 3},
+                    new EnrollmentData {EmployeeId= 11, ConstractionSiteId= 2},
+                    new EnrollmentData {EmployeeId= 12, ConstractionSiteId= 2},
+                    new EnrollmentData {EmployeeId= 13, ConstractionSiteId= 2},
+                    new EnrollmentData {EmployeeId= 14, ConstractionSiteId= 2},
+                    new EnrollmentData {EmployeeId= 15, ConstractionSiteId= 5},
+                    new EnrollmentData {EmployeeId= 16, ConstractionSiteId= 5},
+                    new EnrollmentData {EmployeeId= 17, ConstractionSiteId= 5},
+                    new EnrollmentData {EmployeeId= 5, ConstractionSiteId= 1},
+                    new EnrollmentData {EmployeeId= 6, ConstractionSiteId= 1},
+                    new EnrollmentData {EmployeeId= 7, ConstractionSiteId= 1},
+                };
+                foreach (EnrollmentData enrollment in enrollments)
+                {
+                    await _enrollmentRepo.EnrollEmployee(enrollment);
                 }
                 return CreatedAtAction(nameof(Seed), new { result = "success" });
             }

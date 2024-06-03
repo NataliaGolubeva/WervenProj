@@ -6,12 +6,12 @@ namespace WervenProj.IRepositories
 {
     public interface IConstractionSiteRepository
     {
-        Task<IEnumerable<ConstractionSiteDTO>> GetSites();
+        Task<IEnumerable<ConstractionSiteDTO>> GetConstractionSites();
         Task<ConstractionSiteDTO?> GetConstractionSite(int siteId);
-        Task<int> CreateSite(ConstractionSiteCreate site);
-        Task<bool> UpdateSite(ConstractionSiteCreate site);
-        Task<bool> UpdateSiteStatus(ConstractionSiteUpdateStatus data);
-        Task<bool> DeleteSite(int siteId);
+        Task<int> CreateConstractionSite(ConstractionSiteCreate site);
+        Task<bool> UpdateConstractionSite(ConstractionSiteCreate site);
+        Task<bool> UpdateConstractionSiteStatus(ConstractionSiteUpdateStatus data);
+        Task<bool> DeleteConstractionSite(int siteId);
 
     }
 }

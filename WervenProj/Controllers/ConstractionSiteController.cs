@@ -12,14 +12,16 @@ namespace WervenProj.Controllers
     [Route("api/constractionSites")]
     public class ConstractionSiteController : ControllerBase
     {
-        public ConstractionSiteController(ILogger<ConstractionSiteController> log, IConstractionSiteRepository constractionSiteRepo)
+        public ConstractionSiteController(ILogger<ConstractionSiteController> log, IConstractionSiteRepository constractionSiteRepo, IEnrollmentRepository enrollmentRepo)
         {
             _log = log;
             _constractionSiteRepo = constractionSiteRepo;
+            _enrollmentRepo = enrollmentRepo;
         }
 
         public ILogger<ConstractionSiteController> _log { get; }
         public IConstractionSiteRepository _constractionSiteRepo { get; }
+        public IEnrollmentRepository _enrollmentRepo { get; }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -28,7 +30,7 @@ namespace WervenProj.Controllers
         {
             try
             {
-                var result = await _constractionSiteRepo.GetSites();
+                var result = await _constractionSiteRepo.GetConstractionSites();
                 return Ok(result);
             }
             catch (Exception ex) {
@@ -72,7 +74,7 @@ namespace WervenProj.Controllers
             }
             try
             {
-                var result = await _constractionSiteRepo.CreateSite(site);
+                var result = await _constractionSiteRepo.CreateConstractionSite(site);
 
                 return CreatedAtAction(nameof(CreateSite), new { id = result });
             }
@@ -99,7 +101,7 @@ namespace WervenProj.Controllers
             }
             try
             {
-                var result = await _constractionSiteRepo.UpdateSiteStatus(data);
+                var result = await _constractionSiteRepo.UpdateConstractionSiteStatus(data);
 
                 return result == false ? NotFound("Site is not found") : Ok("Status is updated successfully");
 
@@ -122,9 +124,9 @@ namespace WervenProj.Controllers
         {
             try
             {
-                var result = await _constractionSiteRepo.DeleteSite(id);
+                var result = await _constractionSiteRepo.DeleteConstractionSite(id);
 
-                return result ? Ok() : NotFound("Site with provided Id not found");
+                return result ? Ok("Site deleted successfully") : NotFound("Site with provided Id not found");
             }
             catch (Exception ex)
             {

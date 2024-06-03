@@ -15,9 +15,7 @@ namespace WervenProj.Repositories
         {
             _db = db;
         }
-      
-
-        public async Task<IEnumerable<ConstractionSiteDTO>> GetSites()
+        public async Task<IEnumerable<ConstractionSiteDTO>> GetConstractionSites()
         {
             try
             {
@@ -95,7 +93,7 @@ namespace WervenProj.Repositories
             catch (Exception ex) { throw; }
 
         }
-        public async Task<int> CreateSite(ConstractionSiteCreate site)
+        public async Task<int> CreateConstractionSite(ConstractionSiteCreate site)
         {
             try
             {
@@ -116,12 +114,11 @@ namespace WervenProj.Repositories
                 throw;
             }
         }
-
-        public Task<bool> UpdateSite(ConstractionSiteCreate site)
+        public Task<bool> UpdateConstractionSite(ConstractionSiteCreate site)
         {
             throw new NotImplementedException();
         }
-        public async Task<bool> DeleteSite(int siteId)
+        public async Task<bool> DeleteConstractionSite(int siteId)
         {
             try
             {
@@ -139,8 +136,7 @@ namespace WervenProj.Repositories
             }
             catch (Exception ex) { throw; }
         }
-
-        public async Task<bool> UpdateSiteStatus(ConstractionSiteUpdateStatus data)
+        public async Task<bool> UpdateConstractionSiteStatus(ConstractionSiteUpdateStatus data)
         {
             try
             {

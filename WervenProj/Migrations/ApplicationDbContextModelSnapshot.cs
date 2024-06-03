@@ -53,7 +53,7 @@ namespace WervenProj.Migrations
 
                     b.HasIndex("StatusId");
 
-                    b.ToTable("ConstractionSites");
+                    b.ToTable("ConstractionSites", (string)null);
                 });
 
             modelBuilder.Entity("WervenProj.Models.ConstractionSiteEnrollments", b =>
@@ -86,7 +86,7 @@ namespace WervenProj.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("ConstractionSiteEnrollments");
+                    b.ToTable("ConstractionSiteEnrollments", (string)null);
                 });
 
             modelBuilder.Entity("WervenProj.Models.ConstractionStatus", b =>
@@ -107,7 +107,7 @@ namespace WervenProj.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ConstractionStatuses");
+                    b.ToTable("ConstractionStatuses", (string)null);
 
                     b.HasData(
                         new
@@ -156,7 +156,7 @@ namespace WervenProj.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("WervenProj.Models.EmployeeRole", b =>
@@ -177,7 +177,7 @@ namespace WervenProj.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EmployeeRoles");
+                    b.ToTable("EmployeeRoles", (string)null);
 
                     b.HasData(
                         new
