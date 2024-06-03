@@ -14,6 +14,8 @@ namespace WervenProj.Models
         [MaxLength(50)]
         [Required]
         public string Name { get; set; } = string.Empty;
+        [MaxLength(255)]
+        public string Description { get; set; } = string.Empty;
         public virtual ConstractionStatus Status { get; set; }
         public int StatusId { get; set; }
         public DateOnly StartDate { get; set; }

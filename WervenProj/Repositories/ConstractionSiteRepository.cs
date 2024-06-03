@@ -25,7 +25,7 @@ namespace WervenProj.Repositories
                 var list = new List<ConstractionSiteDTO>();
                 foreach (var site in sites)
                 {
-
+                    var status = await _db.ConstractionStatuses.FirstOrDefaultAsync(s => s.Id == site.StatusId);
                     var emloyeeList = (from enrollment in _db.ConstractionSiteEnrollments
                                        join employee in _db.Employees
                                        on enrollment.EmployeeId equals employee.Id
@@ -43,7 +43,9 @@ namespace WervenProj.Repositories
                     {
                         Id = site.Id,
                         Name = site.Name,
+                        Description = site.Description,
                         StatusId = site.StatusId,
+                        Status = status != null? status.StatusName : "",
                         StartDate = site.StartDate,
                         EndDate = site.EndDate,
                         Employees = emloyeeList
@@ -54,7 +56,7 @@ namespace WervenProj.Repositories
             }
             catch (Exception ex) { throw; }
         }
-        public async Task<ConstractionSiteDTO> GetConstractionSite(int siteId)
+        public async Task<ConstractionSiteDTO?> GetConstractionSite(int siteId)
         {
             try
             {
@@ -63,6 +65,7 @@ namespace WervenProj.Repositories
                 {
                     return null;
                 }
+                var status = await _db.ConstractionStatuses.FirstOrDefaultAsync(s => s.Id == site.StatusId);
                 var emloyeeList = (from enrollment in _db.ConstractionSiteEnrollments
                                    join employee in _db.Employees
                                    on enrollment.EmployeeId equals employee.Id
@@ -79,7 +82,9 @@ namespace WervenProj.Repositories
                 {
                     Id = site.Id,
                     Name = site.Name,
+                    Description = site.Description,
                     StatusId = site.StatusId,
+                    Status = status != null? status.StatusName : "",
                     StartDate = site.StartDate,
                     EndDate = site.EndDate,
                     Employees = emloyeeList
@@ -94,13 +99,12 @@ namespace WervenProj.Repositories
         {
             try
             {
-                var status = await _db.ConstractionStatuses.FirstOrDefaultAsync(s => s.Id == site.StatusId);
                 var newSite = new ConstractionSite
                 {
                     Name = site.Name,
-                    StatusId = status != null? status.Id : 0,
+                    Description = site.Description,
+                    StatusId = site.StatusId,
                     StartDate = DateOnly.FromDateTime(DateTime.Today),
-
                 };
                  
                 _db.Add(newSite);

@@ -57,11 +57,10 @@ namespace WervenProj.Repositories
         {
             try
             {
-                var role = await _db.EmployeeRoles.FirstOrDefaultAsync(s => s.RoleNr == data.RoleNr);
                 var employee = new Employee
                 {
                     Name = data.Name,
-                    RoleId = role != null? role.Id : 0,
+                    RoleId = data.RoleId
                 };
 
                 _db.Add(employee);

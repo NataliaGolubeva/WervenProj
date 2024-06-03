@@ -32,6 +32,7 @@ namespace WervenProj.Controllers
                 return Ok(result);
             }
             catch (Exception ex) {
+                _log.LogError(ex.Message, ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error ");
             }
             
@@ -50,6 +51,7 @@ namespace WervenProj.Controllers
             }
             catch (Exception ex)
             {
+                _log.LogError(ex.Message, ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error ");
             }
 
@@ -76,12 +78,13 @@ namespace WervenProj.Controllers
             }
             catch (Exception ex)
             {
+                _log.LogError(ex.Message, ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error");
             }
 
         }
         [HttpPut]
-        [Route("updateSite")]
+        [Route("updateSiteStatus")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -103,6 +106,7 @@ namespace WervenProj.Controllers
             }
             catch (Exception ex)
             {
+                _log.LogError(ex.Message, ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error");
             }
 
@@ -124,6 +128,7 @@ namespace WervenProj.Controllers
             }
             catch (Exception ex)
             {
+                _log.LogError(ex.Message, ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error");
             }
 
