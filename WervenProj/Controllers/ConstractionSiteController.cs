@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
+using System.Collections.Generic;
 using System.Net.Mime;
 using WervenProj.IRepositories;
 using WervenProj.Models;
@@ -101,6 +103,26 @@ namespace WervenProj.Controllers
             }
             try
             {
+                // if status changed to "afronden" with status id 4, unenroll all employees first if any
+
+                if (data.StatusId == 4) {
+                    var enrollments = await _enrollmentRepo.GetActiveEnrollmentsForSite(data.SiteId);
+                    if (enrollments != null && enrollments.Any())
+                    {
+                        foreach (EnrollmentsDTO enrollment in enrollments)
+                        {
+                            var enrollmentData = new EnrollmentData()
+                            {
+                                EmployeeId = enrollment.EmployeeId,
+                                ConstractionSiteId = enrollment.ConstractionSiteId,
+
+                            };
+                            await _enrollmentRepo.UnEnrollEmployee(enrollmentData);
+                        }
+                    }
+                }
+               
+
                 var result = await _constractionSiteRepo.UpdateConstractionSiteStatus(data);
 
                 return result == false ? NotFound("Site is not found") : Ok("Status is updated successfully");

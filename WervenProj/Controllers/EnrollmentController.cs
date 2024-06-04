@@ -10,14 +10,16 @@ namespace WervenProj.Controllers
     [Route("api/enrollments")]
     public class EnrollmentController : ControllerBase
     {
-        public EnrollmentController(ILogger<EnrollmentController> log, IEnrollmentRepository enrollmentRepo)
+        public EnrollmentController(ILogger<EnrollmentController> log, IEnrollmentRepository enrollmentRepo, IConstractionSiteRepository constractionRepo)
         {
             _log = log;
             _enrollmentRepo = enrollmentRepo;
+            _constractionRepo = constractionRepo;
         }
 
         public ILogger _log { get; }
         public IEnrollmentRepository _enrollmentRepo { get; }
+        public IConstractionSiteRepository _constractionRepo { get; }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -90,7 +92,12 @@ namespace WervenProj.Controllers
             }
             try
             {
-                // check first if enrollment exist
+                // get site and check its status. Is statusId == 4 (afgerond), cannot enroll employees
+                var site = await _constractionRepo.GetConstractionSite(data.ConstractionSiteId);
+                if (site != null && site.StatusId == 4) {
+                    return BadRequest("Cannot enroll for site, which status is finished");
+                }
+                // check if enrollment with such employee and site is exist
                 var selected = await _enrollmentRepo.GetSelectedEnrollment(data);
                 if (selected != null) {
                     // check if enrollment is active, so employee is already enrolled for this site. To avoid duplicates
