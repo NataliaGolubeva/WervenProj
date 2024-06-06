@@ -147,6 +147,17 @@ namespace WervenProj.Controllers
         {
             try
             {
+                // check if employees are enrolled
+                //var enrollments = _enrollmentRepo.GetActiveEnrollmentsForSite(id);
+                //if (enrollments != null) {
+                //    return BadRequest("Cannot delete site with employees enrolled");
+                //}
+                // or check status and restrint from deleting with status "InWerking"
+                var site = await _constractionSiteRepo.GetConstractionSite(id);
+                if (site != null && site.StatusId == 3)
+                {
+                    return BadRequest("Cannot delete site with status 'in werking'");
+                }
                 var result = await _constractionSiteRepo.DeleteConstractionSite(id);
 
                 return result ? Ok("Site deleted successfully") : NotFound("Site with provided Id not found");
