@@ -28,7 +28,7 @@ namespace WervenProj.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task <ActionResult<ConstractionSite>> GetSites()
+        public async Task <ActionResult<IEnumerable<ConstractionSite>>> GetSites()
         {
             try
             {
@@ -96,6 +96,7 @@ namespace WervenProj.Controllers
         public async Task<ActionResult<int>> UpdateStatus(ConstractionSiteUpdateStatus data)
         {
             // validate manually, the best is to fetch statuses and select available from dropdown
+            // to do: check if current status is selected status => skip action. Can do in frontend
             var isValid = ConstractionSiteUpdateStatus.Validate(data);  
             if (!isValid)
             {
@@ -154,6 +155,25 @@ namespace WervenProj.Controllers
             {
                 _log.LogError(ex.Message, ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error");
+            }
+
+        }
+
+        [HttpGet]
+        [Route("statusList")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<ConstractionSite>>> GetStatusList()
+        {
+            try
+            {
+                var result = await _constractionSiteRepo.GetStatusList();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _log.LogError(ex.Message, ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error ");
             }
 
         }

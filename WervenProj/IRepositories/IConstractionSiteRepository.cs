@@ -8,6 +8,7 @@ namespace WervenProj.IRepositories
     {
         Task<IEnumerable<ConstractionSiteDTO>> GetConstractionSites();
         Task<ConstractionSiteDTO?> GetConstractionSite(int siteId);
+        Task<IEnumerable<ConstractionStatus>> GetStatusList();
         Task<int> CreateConstractionSite(ConstractionSiteCreate site);
         Task<bool> UpdateConstractionSite(ConstractionSiteCreate site);
         Task<bool> UpdateConstractionSiteStatus(ConstractionSiteUpdateStatus data);

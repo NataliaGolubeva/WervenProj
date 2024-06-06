@@ -155,5 +155,14 @@ namespace WervenProj.Repositories
                 throw;
             }
         }
+
+        public async Task<IEnumerable<ConstractionStatus>> GetStatusList()
+        {
+            try { 
+                var statuses = await _db.ConstractionStatuses.ToListAsync();
+                return statuses;
+                    }
+            catch (Exception ex) { throw; }
+        }
     }
 }

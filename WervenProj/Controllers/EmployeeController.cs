@@ -25,7 +25,7 @@ namespace WervenProj.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<EmployeeDTO>> GetEmployees()
+        public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetEmployees()
         {
             try
             {
@@ -108,6 +108,24 @@ namespace WervenProj.Controllers
             {
                 _log.LogError(ex.Message, ex);
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error");
+            }
+
+        }
+        [HttpGet]
+        [Route("roles")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetRoles()
+        {
+            try
+            {
+                var result = await _employeeRepo.GetRoles();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _log.LogError(ex.Message, ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error ");
             }
 
         }

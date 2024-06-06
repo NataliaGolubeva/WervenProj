@@ -98,6 +98,15 @@ namespace WervenProj.Repositories
             catch (Exception ex) { throw; }
         }
 
-     
+        public async Task<IEnumerable<EmployeeRole>> GetRoles()
+        {
+            try
+            {
+                var roles = await _db.EmployeeRoles.ToListAsync();
+                return roles;
+
+            }
+            catch (Exception ex) { throw; }
+        }
     }
 }
