@@ -26,8 +26,9 @@ namespace WervenProj.Repositories
                            {
                                Id = employee.Id,
                                Name = employee.Name,
-                               Role = role.RoleName
-                               
+                               Role = role.RoleName,
+                               RoleNr = role.RoleNr
+
                            };
                 var list = await query.ToListAsync();
                 return list;
@@ -46,7 +47,8 @@ namespace WervenProj.Repositories
                             {
                                 Id = employee.Id,
                                 Name = employee.Name,
-                                Role = role.RoleName
+                                Role = role.RoleName,
+                                RoleNr = role.RoleNr
 
                             };
                 var result = await query.FirstOrDefaultAsync();

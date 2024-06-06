@@ -10,16 +10,18 @@ namespace WervenProj.Controllers
     [Route("api/enrollments")]
     public class EnrollmentController : ControllerBase
     {
-        public EnrollmentController(ILogger<EnrollmentController> log, IEnrollmentRepository enrollmentRepo, IConstractionSiteRepository constractionRepo)
+        public EnrollmentController(ILogger<EnrollmentController> log, IEnrollmentRepository enrollmentRepo, IConstractionSiteRepository constractionRepo, IEmployeeRepository employeeRepo)
         {
             _log = log;
             _enrollmentRepo = enrollmentRepo;
             _constractionRepo = constractionRepo;
+            _employeeRepo = employeeRepo;
         }
 
         public ILogger _log { get; }
         public IEnrollmentRepository _enrollmentRepo { get; }
         public IConstractionSiteRepository _constractionRepo { get; }
+        public IEmployeeRepository _employeeRepo { get; }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -94,6 +96,10 @@ namespace WervenProj.Controllers
             {
                 // get site and check its status. Is statusId == 4 (afgerond), cannot enroll employees
                 var site = await _constractionRepo.GetConstractionSite(data.ConstractionSiteId);
+                var employee = await _employeeRepo.GetEmployee(data.EmployeeId);
+                if (site == null || employee == null) {
+                     return NotFound("Site or employee is not found");
+                }
                 if (site != null && site.StatusId == 4) {
                     return BadRequest("Cannot enroll for site, which status is finished");
                 }

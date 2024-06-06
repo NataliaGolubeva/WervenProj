@@ -34,7 +34,8 @@ namespace WervenProj.Repositories
                                        {
                                            Id = employee.Id,
                                            Name = employee.Name,
-                                           Role = role.RoleName
+                                           Role = role.RoleName,
+                                           RoleNr = role.RoleNr
                                        }).ToList();
 
                     var siteDTO = new ConstractionSiteDTO()
@@ -44,6 +45,7 @@ namespace WervenProj.Repositories
                         Description = site.Description,
                         StatusId = site.StatusId,
                         Status = status != null? status.StatusName : "",
+                        StatusNr = status != null? status.StatusNr : -1,
                         StartDate = site.StartDate,
                         EndDate = site.EndDate,
                         Employees = emloyeeList

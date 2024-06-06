@@ -7,5 +7,6 @@ namespace WervenProj.Models.DTO
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Role { get; set; } = String.Empty;
+        public int RoleNr { get; set; }
     }
 }

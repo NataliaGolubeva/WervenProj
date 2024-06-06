@@ -49,10 +49,10 @@ namespace WervenProj.Controllers
                     new EmployeeCreate {Name= "Leo Wells", RoleId= 4},
                     new EmployeeCreate {Name= "Jacqueline Schmidt", RoleId= 2},
                 };
-                foreach (EmployeeCreate employee in employees)
-                {
-                    await _employeeRepo.CreateEmployee(employee);
-                }
+                //foreach (EmployeeCreate employee in employees)
+                //{
+                //    await _employeeRepo.CreateEmployee(employee);
+                //}
                 List<ConstractionSiteCreate> sites = new List<ConstractionSiteCreate>
                 {
                     new ConstractionSiteCreate {
@@ -81,28 +81,28 @@ namespace WervenProj.Controllers
                         StatusId= 4
                     }
                 };
-                foreach (ConstractionSiteCreate site in sites)
-                {
-                    await _constractionSiteRepo.CreateConstractionSite(site);
-                }
+                //foreach (ConstractionSiteCreate site in sites)
+                //{
+                //    await _constractionSiteRepo.CreateConstractionSite(site);
+                //}
                 List<EnrollmentData> enrollments = new List<EnrollmentData>
                 {
-                    new EnrollmentData {EmployeeId= 5, ConstractionSiteId= 3},
-                    new EnrollmentData {EmployeeId= 6, ConstractionSiteId= 3},
-                    new EnrollmentData {EmployeeId= 7, ConstractionSiteId= 3},
-                    new EnrollmentData {EmployeeId= 8, ConstractionSiteId= 3},
-                    new EnrollmentData {EmployeeId= 9, ConstractionSiteId= 3},
-                    new EnrollmentData {EmployeeId= 10, ConstractionSiteId= 3},
-                    new EnrollmentData {EmployeeId= 11, ConstractionSiteId= 2},
-                    new EnrollmentData {EmployeeId= 12, ConstractionSiteId= 2},
-                    new EnrollmentData {EmployeeId= 13, ConstractionSiteId= 2},
-                    new EnrollmentData {EmployeeId= 14, ConstractionSiteId= 2},
-                    new EnrollmentData {EmployeeId= 15, ConstractionSiteId= 5},
-                    new EnrollmentData {EmployeeId= 16, ConstractionSiteId= 5},
-                    new EnrollmentData {EmployeeId= 17, ConstractionSiteId= 5},
-                    new EnrollmentData {EmployeeId= 5, ConstractionSiteId= 1},
-                    new EnrollmentData {EmployeeId= 6, ConstractionSiteId= 1},
-                    new EnrollmentData {EmployeeId= 7, ConstractionSiteId= 1},
+                    new EnrollmentData {EmployeeId= 5, ConstractionSiteId= 26},
+                    new EnrollmentData {EmployeeId= 6, ConstractionSiteId= 27},
+                    new EnrollmentData {EmployeeId= 7, ConstractionSiteId= 28},
+                    new EnrollmentData {EmployeeId= 8, ConstractionSiteId= 28},
+                    new EnrollmentData {EmployeeId= 9, ConstractionSiteId= 28},
+                    new EnrollmentData {EmployeeId= 10, ConstractionSiteId= 28},
+                    new EnrollmentData {EmployeeId= 11, ConstractionSiteId= 28},
+                    new EnrollmentData {EmployeeId= 12, ConstractionSiteId= 28},
+                    new EnrollmentData {EmployeeId= 13, ConstractionSiteId= 29},
+                    new EnrollmentData {EmployeeId= 14, ConstractionSiteId= 29},
+                    new EnrollmentData {EmployeeId= 15, ConstractionSiteId= 29},
+                    new EnrollmentData {EmployeeId= 16, ConstractionSiteId= 29},
+                    new EnrollmentData {EmployeeId= 17, ConstractionSiteId= 26},
+                    new EnrollmentData {EmployeeId= 5, ConstractionSiteId= 26},
+                    new EnrollmentData {EmployeeId= 6, ConstractionSiteId= 26},
+                    new EnrollmentData {EmployeeId= 7, ConstractionSiteId= 26},
                 };
                 foreach (EnrollmentData enrollment in enrollments)
                 {
